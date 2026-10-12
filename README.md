@@ -91,6 +91,10 @@ version of the same request:
   been blocked or held), or a credential ended up covering a different
   amount/currency than what was actually evaluated.
 
+## Design partners wanted
+
+We're looking for 3 design partners to try Pink Agentic AI Payments before general availability, free during the design-partner period, with hands-on setup and early access. Try the sandbox at [agentic-sandbox.pinkwallet.com/demo](https://agentic-sandbox.pinkwallet.com/demo), then reach us at [support@pinkwallet.com](mailto:support@pinkwallet.com) or open an issue titled "Design partner" in this repo.
+
 ## License
 
 MIT, see [LICENSE](LICENSE). The three findings this suite is built on are
