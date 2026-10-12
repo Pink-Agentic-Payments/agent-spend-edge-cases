@@ -21,10 +21,10 @@ Pink Agentic AI Payments checks every payment an agent requests against company 
 | What | Install | Repo |
 |---|---|---|
 | JS/TS client | `npm install pink-agentic-payments` | [pink-agentic-payments-js](https://github.com/Pink-Agentic-Payments/pink-agentic-payments-js) |
-| Python client | PyPI pending → `pip install git+https://github.com/Pink-Agentic-Payments/pink-agentic-payments-python` | [pink-agentic-payments-python](https://github.com/Pink-Agentic-Payments/pink-agentic-payments-python) |
+| Python client | `pip install pink-agentic-payments` | [pink-agentic-payments-python](https://github.com/Pink-Agentic-Payments/pink-agentic-payments-python) |
 | MCP server (stdio, any MCP client) | `npx -y pink-agentic-payments-mcp` (env `PINK_AGENT_API_KEY`) | [pink-agentic-payments-mcp](https://github.com/Pink-Agentic-Payments/pink-agentic-payments-mcp) |
 | Vercel AI SDK tools | `npm install pink-agentic-payments-ai-sdk ai zod` | [pink-agentic-payments-ai-sdk](https://github.com/Pink-Agentic-Payments/pink-agentic-payments-ai-sdk) |
-| LangChain / LangGraph tools | PyPI pending → git install, see repo README | [langchain-pink](https://github.com/Pink-Agentic-Payments/langchain-pink) |
+| LangChain / LangGraph tools | `pip install langchain-pink` | [langchain-pink](https://github.com/Pink-Agentic-Payments/langchain-pink) |
 | n8n community node | n8n: Settings → Community Nodes → `n8n-nodes-pink` | [n8n-nodes-pink](https://github.com/Pink-Agentic-Payments/n8n-nodes-pink) |
 
 Remote MCP endpoint: `https://agentic-sandbox.pinkwallet.com/mcp` · Docs: https://pinkwallet.com/agentic/developers/ · Sandbox (test money, no signup): https://agentic-sandbox.pinkwallet.com
