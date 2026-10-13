@@ -71,26 +71,47 @@ test.** This repo ships exactly one working adapter (Pink's own public,
 test-money-only sandbox) and a template for your own — no other vendor's
 API, authorized or not, is referenced here.
 
-## Results: Pink's sandbox, 2026-10-10
+## Results: Pink's sandbox, 2026-10-13 (23 cases)
 
 Run against `https://agentic-sandbox.pinkwallet.com` (coffee-template
-workspace, test money only). Full table and raw JSON:
+workspace, test money only). Full tables and raw JSON:
 [results/pink-sandbox-2026-10-10.md](results/pink-sandbox-2026-10-10.md) ·
-[results/pink-sandbox-2026-10-10.json](results/pink-sandbox-2026-10-10.json).
+[results/pink-sandbox-2026-10-10.json](results/pink-sandbox-2026-10-10.json)
+(original 21 cases) and
+[results/pink-sandbox-2026-10-13-concurrency.md](results/pink-sandbox-2026-10-13-concurrency.md) ·
+[results/pink-sandbox-2026-10-13-concurrency.json](results/pink-sandbox-2026-10-13-concurrency.json)
+(the 2 concurrency cases added 2026-10-13).
 
-**21 cases run: 19 safe, 2 known-gap (already-disclosed, fix in progress), 0 new unsafe findings.**
+**23 cases run: 20 safe, 2 known-gap (already-disclosed, fix in progress), 1 not-applicable, 0 new unsafe findings.**
 
-| category | cases | safe | known-gap |
-|----------|-------|------|-----------|
-| currency strings | 6 | 6 | 0 |
-| amounts | 9 | 7 | 2 (sub-cent / excess-decimal, matches disclosed finding #3) |
-| time (client-supplied clock) | 2 | 2 | 0 |
-| idempotency replays | 2 | 2 | 0 |
-| payee name matching | 2 | 2 | 0 |
+| category | cases | safe | known-gap | not-applicable |
+|----------|-------|------|-----------|-----------------|
+| currency strings | 6 | 6 | 0 | 0 |
+| amounts | 9 | 7 | 2 (sub-cent / excess-decimal, matches disclosed finding #3) | 0 |
+| time (client-supplied clock) | 2 | 2 | 0 | 0 |
+| idempotency replays | 2 | 2 | 0 | 0 |
+| payee name matching | 2 | 2 | 0 | 0 |
+| concurrency | 2 | 1 (same idempotency key fired in parallel, N=10) | 0 | 1 (refund racing a payment — sandbox has no refund operation, see below) |
 
 The 2 known-gap cases reproduce finding #3 above and are expected to flip
 to "safe" once that fix ships — they're not a new issue, just the suite
-checking the one that's already public.
+checking the one that's already public. The 1 not-applicable case
+(`RF1`, refund racing a new payment) could not be run because the sandbox
+does not expose a refund/reversal/void/cancel operation at all — checked
+against the REST docs, the MCP tools-reference, and a live probe of
+`/v1/openapi.json`; see
+[results/pink-sandbox-2026-10-13-concurrency.md](results/pink-sandbox-2026-10-13-concurrency.md#rf1-detail-refund-racing-a-new-payment--not-applicable)
+for exactly what was checked. Nothing was invented.
+
+### Added 2026-10-13 after reader questions on dev.to
+
+Two readers, `@arhancanli` and `@mickyarun`, asked whether this suite
+covered concurrency — specifically parallel requests sharing one
+idempotency key, and a refund racing a new payment. We added both as
+`R3` (same idempotency key fired in parallel: **safe**, exactly one
+payment created across 10 concurrent calls, repeated 4 times) and `RF1`
+(refund racing a payment: **not applicable**, no refund endpoint exists
+in this API) and are publishing the result either way, as promised.
 
 ## What "safe" means here
 

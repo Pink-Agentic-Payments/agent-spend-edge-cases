@@ -55,3 +55,12 @@ class PaymentRulesAdapter:
     def get_payment(self, payment_id):
         """Fetch a previously created payment/hold. Returns (status, body)."""
         raise NotImplementedError
+
+    def get_budget(self):
+        """
+        Optional: fetch current budget/spend status, e.g.
+            {"spent_today": ..., "spent_this_month": ..., ...}
+        Only used by the concurrency cases (same idempotency key fired in
+        parallel) to show spend moved exactly once. Returns (status, body).
+        """
+        raise NotImplementedError

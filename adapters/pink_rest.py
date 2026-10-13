@@ -91,3 +91,6 @@ class PaymentRulesAdapter:
 
     def get_payment(self, payment_id):
         return self._http("GET", "/v1/payments/%s" % payment_id, token=self.agent_key)
+
+    def get_budget(self):
+        return self._http("GET", "/v1/budget", token=self.agent_key)

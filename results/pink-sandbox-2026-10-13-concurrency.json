@@ -1,0 +1,2383 @@
+{
+  "workspace": {
+    "workspace_id": "ba6gv9crcw",
+    "default_payee_id": "p_cc",
+    "default_payee_name": "Counter Culture Coffee",
+    "currency": "USD",
+    "reused": true
+  },
+  "workspace_id_note": "ba6gv9crcw, coffee template, created 2026-10-13 for this concurrency run \u2014 PM: please exclude from sign-up stats",
+  "full_suite_runs": [
+    {
+      "workspace": {
+        "workspace_id": "ba6gv9crcw",
+        "default_payee_id": "p_cc",
+        "default_payee_name": "Counter Culture Coffee",
+        "currency": "USD",
+        "reused": true
+      },
+      "results": [
+        {
+          "id": "C1",
+          "category": "currency",
+          "mutation": "currency \"EUR \" (trailing space)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency 'EUR '; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency 'EUR '; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C2",
+          "category": "currency",
+          "mutation": "currency \" EUR\" (leading space)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency ' EUR'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency ' EUR'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C3",
+          "category": "currency",
+          "mutation": "currency \"usd\" (lowercase)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $2,760 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $500 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 06:52 there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "C4",
+          "category": "currency",
+          "mutation": "currency \"XYZ\" (unknown code)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency 'XYZ'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency 'XYZ'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C5",
+          "category": "currency",
+          "mutation": "currency \"\" (empty string)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $2,760 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $500 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 06:52 there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "C6",
+          "category": "currency",
+          "mutation": "currency 1 (number instead of string)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency '1'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency '1'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "A1",
+          "category": "amount",
+          "mutation": "amount 500.0001 (sub-cent, 4 decimal places in USD)",
+          "expected": "HTTP 400 (amount has more decimal places than the currency allows) \u2014 currently fix-in-progress per the disclosed finding #3",
+          "outcome": "known_gap",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,160 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $900 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "not rejected, got decision 'would_allow' \u2014 matches disclosed finding #3 (kimutaiRop), fix in progress per README Fix log. "
+        },
+        {
+          "id": "A2",
+          "category": "amount",
+          "mutation": "amount 1500.5 in JPY (JPY allows 0 decimals)",
+          "expected": "HTTP 400 (amount has more decimal places than the currency allows) \u2014 currently fix-in-progress per the disclosed finding #3",
+          "outcome": "known_gap",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $2,670.05 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $410.05 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "not rejected, got decision 'would_allow' \u2014 matches disclosed finding #3 (kimutaiRop), fix in progress per README Fix log. "
+        },
+        {
+          "id": "A3",
+          "category": "amount",
+          "mutation": "amount -100 (negative)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "A4",
+          "category": "amount",
+          "mutation": "amount 0 (zero)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "A5",
+          "category": "amount",
+          "mutation": "amount \"5e2\" (scientific notation, string)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,160 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $900 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A6",
+          "category": "amount",
+          "mutation": "amount 5e2 (scientific notation, number)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,160 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $900 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A7",
+          "category": "amount",
+          "mutation": "amount \"500\" (string instead of number)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,160 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $900 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $18,020.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A8",
+          "category": "amount",
+          "mutation": "amount 1e15 (very large)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_block",
+          "response": {
+            "decision": "would_block",
+            "reason": "Purchasing AI's monthly budget is used up",
+            "rule": null,
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "STOP \u00b7 Monthly budget \u00b7 $2,660 used of $4,000 \u00b7 this would exceed it"
+            ]
+          },
+          "note": "evaluated MORE strictly than canonical (would_block vs canonical would_allow)"
+        },
+        {
+          "id": "A9",
+          "category": "amount",
+          "mutation": "amount \"NaN\" (string)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "T1",
+          "category": "time",
+          "mutation": "client-supplied local_hour on a real payment",
+          "expected": "ignored; decision matches the no-spoof canonical",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_77f57a09342d",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases T1 local_hour spoof",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:32.970Z",
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:32.970Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-F79B2D02",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "local_hour=14 ignored on a real payment, decision matches the no-spoof canonical (allowed)"
+        },
+        {
+          "id": "T2",
+          "category": "time",
+          "mutation": "client-supplied timestamp/created_at on a real payment",
+          "expected": "ignored; decision matches the no-spoof canonical",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_77ae1865e22d",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases T2 timestamp spoof",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:33.320Z",
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:33.320Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-FE62E7F5",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "client-supplied timestamp/created_at ignored, decision matches canonical (allowed)"
+        },
+        {
+          "id": "R1",
+          "category": "replay",
+          "mutation": "same idempotency key, different amount",
+          "expected": "rejected (4xx) or the original payment returned unchanged, never re-evaluated for the new amount",
+          "outcome": "safe",
+          "status": 409,
+          "decision": null,
+          "response": {
+            "error": "idempotency_key_reused: this key was already used for a different payment request"
+          },
+          "note": "reused key with a different amount correctly rejected"
+        },
+        {
+          "id": "R2",
+          "category": "replay",
+          "mutation": "same idempotency key, identical payload (true retry)",
+          "expected": "same payment_id/decision returned, not double-charged",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_1d7a20e649e5",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases replay original",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:33.497Z",
+            "replayed": true,
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:33.497Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-D7F44F5C",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "identical retry returned the same payment_id/decision (replayed=True), not re-evaluated or double-charged"
+        },
+        {
+          "id": "P1",
+          "category": "payee",
+          "mutation": "payee_name in ALL CAPS",
+          "expected": "rejected, OR recognised as the same approved payee, OR (safe-but-stricter) treated as an unrecognised payee and asked for approval \u2014 never allowed looser than the canonical approved-payee decision",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,020 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $760 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,720.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "P2",
+          "category": "payee",
+          "mutation": "payee_name with leading/trailing whitespace",
+          "expected": "rejected, OR recognised as the same approved payee, OR (safe-but-stricter) treated as an unrecognised payee and asked for approval \u2014 never allowed looser than the canonical approved-payee decision",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_ask",
+          "response": {
+            "decision": "would_ask",
+            "reason": "New payee: always ask the owner",
+            "rule": {
+              "id": "r8",
+              "name": "New payee: always ask the owner",
+              "agents": "*",
+              "payee": "new",
+              "amount": {
+                "min": 0,
+                "max": null,
+                "window": "tx"
+              },
+              "action": "ask",
+              "approvers": {
+                "people": [
+                  "owner"
+                ],
+                "n": 1,
+                "label": "Maya Chen (Owner)"
+              }
+            },
+            "approvers": "Maya Chen (Owner)",
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,020 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $760 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,720.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 payee out of scope",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "SKIP \u00b7 Small supply orders go through \u00b7 payee out of scope",
+              "SKIP \u00b7 Bigger supply orders: store manager checks \u00b7 payee out of scope",
+              "SKIP \u00b7 Ads up to $300 a day \u00b7 different agent",
+              "SKIP \u00b7 Ads above $300 a day: ask the owner \u00b7 different agent",
+              "HIT \u00b7 New payee: always ask the owner \u00b7 matched \u00b7 ask Maya"
+            ]
+          },
+          "note": "evaluated MORE strictly than canonical (would_ask vs canonical would_allow)"
+        },
+        {
+          "id": "R3",
+          "category": "concurrency",
+          "mutation": "same idempotency key fired in parallel (N=10)",
+          "expected": "exactly one payment_id across all N calls; spend moves exactly once",
+          "outcome": "safe",
+          "status": [
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201
+          ],
+          "decision": null,
+          "response": {
+            "statuses": [
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201
+            ],
+            "replayed_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              null
+            ],
+            "payment_ids": [
+              "pay_d63a34e23911"
+            ],
+            "spent_before": 700,
+            "spent_after": 800,
+            "spent_delta": 100,
+            "n_requests": 10,
+            "amount_per_request": 100
+          },
+          "note": "exactly 1 payment_id across 10 parallel calls, spend moved by 100 exactly once (spent_today 700 -> 800), replayed flags: [True, True, True, True, True, True, True, True, True, None]"
+        },
+        {
+          "id": "RF1",
+          "category": "concurrency",
+          "mutation": "refund racing a new payment",
+          "expected": "not applicable if the sandbox has no refund operation (checked, does not invent an endpoint); otherwise cap must never be exceeded",
+          "outcome": "not_applicable",
+          "status": null,
+          "decision": null,
+          "response": {
+            "checked": [
+              "connect-via-rest docs",
+              "tools-reference docs",
+              "GET /v1/openapi.json with agent key"
+            ]
+          },
+          "note": "not applicable: the sandbox has no refund/reversal/void/cancel operation. Checked the REST route list and the MCP tools-reference (7 tools: get_budget, list_payees, list_rules, check_policy, request_payment, get_credential, report_receipt) on 2026-10-13 \u2014 neither lists one, and a live GET on /v1/openapi.json with an agent key returned {\"error\": \"unknown route for an agent key\"}. No endpoint was invented or guessed; no payment-moving calls were made for this case."
+        }
+      ],
+      "summary": {
+        "safe": 20,
+        "known_gap": 2,
+        "not_applicable": 1,
+        "unsafe": 0,
+        "errors": 0,
+        "total": 23
+      }
+    },
+    {
+      "workspace": {
+        "workspace_id": "ba6gv9crcw",
+        "default_payee_id": "p_cc",
+        "default_payee_name": "Counter Culture Coffee",
+        "currency": "USD",
+        "reused": true
+      },
+      "results": [
+        {
+          "id": "C1",
+          "category": "currency",
+          "mutation": "currency \"EUR \" (trailing space)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency 'EUR '; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency 'EUR '; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C2",
+          "category": "currency",
+          "mutation": "currency \" EUR\" (leading space)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency ' EUR'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency ' EUR'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C3",
+          "category": "currency",
+          "mutation": "currency \"usd\" (lowercase)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,160 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $900 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 06:52 there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "C4",
+          "category": "currency",
+          "mutation": "currency \"XYZ\" (unknown code)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency 'XYZ'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency 'XYZ'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C5",
+          "category": "currency",
+          "mutation": "currency \"\" (empty string)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,160 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $900 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 06:52 there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "C6",
+          "category": "currency",
+          "mutation": "currency 1 (number instead of string)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency '1'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency '1'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "A1",
+          "category": "amount",
+          "mutation": "amount 500.0001 (sub-cent, 4 decimal places in USD)",
+          "expected": "HTTP 400 (amount has more decimal places than the currency allows) \u2014 currently fix-in-progress per the disclosed finding #3",
+          "outcome": "known_gap",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,560 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,300 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "not rejected, got decision 'would_allow' \u2014 matches disclosed finding #3 (kimutaiRop), fix in progress per README Fix log. "
+        },
+        {
+          "id": "A2",
+          "category": "amount",
+          "mutation": "amount 1500.5 in JPY (JPY allows 0 decimals)",
+          "expected": "HTTP 400 (amount has more decimal places than the currency allows) \u2014 currently fix-in-progress per the disclosed finding #3",
+          "outcome": "known_gap",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,070.05 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $810.05 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "not rejected, got decision 'would_allow' \u2014 matches disclosed finding #3 (kimutaiRop), fix in progress per README Fix log. "
+        },
+        {
+          "id": "A3",
+          "category": "amount",
+          "mutation": "amount -100 (negative)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "A4",
+          "category": "amount",
+          "mutation": "amount 0 (zero)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "A5",
+          "category": "amount",
+          "mutation": "amount \"5e2\" (scientific notation, string)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,560 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,300 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A6",
+          "category": "amount",
+          "mutation": "amount 5e2 (scientific notation, number)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,560 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,300 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A7",
+          "category": "amount",
+          "mutation": "amount \"500\" (string instead of number)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,560 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,300 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,620.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A8",
+          "category": "amount",
+          "mutation": "amount 1e15 (very large)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_block",
+          "response": {
+            "decision": "would_block",
+            "reason": "Purchasing AI's monthly budget is used up",
+            "rule": null,
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "STOP \u00b7 Monthly budget \u00b7 $3,060 used of $4,000 \u00b7 this would exceed it"
+            ]
+          },
+          "note": "evaluated MORE strictly than canonical (would_block vs canonical would_allow)"
+        },
+        {
+          "id": "A9",
+          "category": "amount",
+          "mutation": "amount \"NaN\" (string)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "T1",
+          "category": "time",
+          "mutation": "client-supplied local_hour on a real payment",
+          "expected": "ignored; decision matches the no-spoof canonical",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_31152c0295c6",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases T1 local_hour spoof",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:44.548Z",
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:44.548Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-111C1B91",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "local_hour=14 ignored on a real payment, decision matches the no-spoof canonical (allowed)"
+        },
+        {
+          "id": "T2",
+          "category": "time",
+          "mutation": "client-supplied timestamp/created_at on a real payment",
+          "expected": "ignored; decision matches the no-spoof canonical",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_514ec66db953",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases T2 timestamp spoof",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:44.833Z",
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:44.833Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-599B5794",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "client-supplied timestamp/created_at ignored, decision matches canonical (allowed)"
+        },
+        {
+          "id": "R1",
+          "category": "replay",
+          "mutation": "same idempotency key, different amount",
+          "expected": "rejected (4xx) or the original payment returned unchanged, never re-evaluated for the new amount",
+          "outcome": "safe",
+          "status": 409,
+          "decision": null,
+          "response": {
+            "error": "idempotency_key_reused: this key was already used for a different payment request"
+          },
+          "note": "reused key with a different amount correctly rejected"
+        },
+        {
+          "id": "R2",
+          "category": "replay",
+          "mutation": "same idempotency key, identical payload (true retry)",
+          "expected": "same payment_id/decision returned, not double-charged",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_f0670955e690",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases replay original",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:44.994Z",
+            "replayed": true,
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:44.994Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-FA0ED5D7",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "identical retry returned the same payment_id/decision (replayed=True), not re-evaluated or double-charged"
+        },
+        {
+          "id": "P1",
+          "category": "payee",
+          "mutation": "payee_name in ALL CAPS",
+          "expected": "rejected, OR recognised as the same approved payee, OR (safe-but-stricter) treated as an unrecognised payee and asked for approval \u2014 never allowed looser than the canonical approved-payee decision",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,420 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,160 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,320.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "P2",
+          "category": "payee",
+          "mutation": "payee_name with leading/trailing whitespace",
+          "expected": "rejected, OR recognised as the same approved payee, OR (safe-but-stricter) treated as an unrecognised payee and asked for approval \u2014 never allowed looser than the canonical approved-payee decision",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_ask",
+          "response": {
+            "decision": "would_ask",
+            "reason": "New payee: always ask the owner",
+            "rule": {
+              "id": "r8",
+              "name": "New payee: always ask the owner",
+              "agents": "*",
+              "payee": "new",
+              "amount": {
+                "min": 0,
+                "max": null,
+                "window": "tx"
+              },
+              "action": "ask",
+              "approvers": {
+                "people": [
+                  "owner"
+                ],
+                "n": 1,
+                "label": "Maya Chen (Owner)"
+              }
+            },
+            "approvers": "Maya Chen (Owner)",
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,420 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,160 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,320.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 payee out of scope",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "SKIP \u00b7 Small supply orders go through \u00b7 payee out of scope",
+              "SKIP \u00b7 Bigger supply orders: store manager checks \u00b7 payee out of scope",
+              "SKIP \u00b7 Ads up to $300 a day \u00b7 different agent",
+              "SKIP \u00b7 Ads above $300 a day: ask the owner \u00b7 different agent",
+              "HIT \u00b7 New payee: always ask the owner \u00b7 matched \u00b7 ask Maya"
+            ]
+          },
+          "note": "evaluated MORE strictly than canonical (would_ask vs canonical would_allow)"
+        },
+        {
+          "id": "R3",
+          "category": "concurrency",
+          "mutation": "same idempotency key fired in parallel (N=10)",
+          "expected": "exactly one payment_id across all N calls; spend moves exactly once",
+          "outcome": "safe",
+          "status": [
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201
+          ],
+          "decision": null,
+          "response": {
+            "statuses": [
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201
+            ],
+            "replayed_flags": [
+              true,
+              true,
+              null,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "payment_ids": [
+              "pay_583762a77ab7"
+            ],
+            "spent_before": 1100,
+            "spent_after": 1200,
+            "spent_delta": 100,
+            "n_requests": 10,
+            "amount_per_request": 100
+          },
+          "note": "exactly 1 payment_id across 10 parallel calls, spend moved by 100 exactly once (spent_today 1100 -> 1200), replayed flags: [True, True, None, True, True, True, True, True, True, True]"
+        },
+        {
+          "id": "RF1",
+          "category": "concurrency",
+          "mutation": "refund racing a new payment",
+          "expected": "not applicable if the sandbox has no refund operation (checked, does not invent an endpoint); otherwise cap must never be exceeded",
+          "outcome": "not_applicable",
+          "status": null,
+          "decision": null,
+          "response": {
+            "checked": [
+              "connect-via-rest docs",
+              "tools-reference docs",
+              "GET /v1/openapi.json with agent key"
+            ]
+          },
+          "note": "not applicable: the sandbox has no refund/reversal/void/cancel operation. Checked the REST route list and the MCP tools-reference (7 tools: get_budget, list_payees, list_rules, check_policy, request_payment, get_credential, report_receipt) on 2026-10-13 \u2014 neither lists one, and a live GET on /v1/openapi.json with an agent key returned {\"error\": \"unknown route for an agent key\"}. No endpoint was invented or guessed; no payment-moving calls were made for this case."
+        }
+      ],
+      "summary": {
+        "safe": 20,
+        "known_gap": 2,
+        "not_applicable": 1,
+        "unsafe": 0,
+        "errors": 0,
+        "total": 23
+      }
+    },
+    {
+      "workspace": {
+        "workspace_id": "ba6gv9crcw",
+        "default_payee_id": "p_cc",
+        "default_payee_name": "Counter Culture Coffee",
+        "currency": "USD",
+        "reused": true
+      },
+      "results": [
+        {
+          "id": "C1",
+          "category": "currency",
+          "mutation": "currency \"EUR \" (trailing space)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency 'EUR '; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency 'EUR '; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C2",
+          "category": "currency",
+          "mutation": "currency \" EUR\" (leading space)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency ' EUR'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency ' EUR'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C3",
+          "category": "currency",
+          "mutation": "currency \"usd\" (lowercase)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,560 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,300 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 06:52 there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "C4",
+          "category": "currency",
+          "mutation": "currency \"XYZ\" (unknown code)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency 'XYZ'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency 'XYZ'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "C5",
+          "category": "currency",
+          "mutation": "currency \"\" (empty string)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,560 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,300 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 06:52 there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "C6",
+          "category": "currency",
+          "mutation": "currency 1 (number instead of string)",
+          "expected": "rejected (4xx) OR evaluated exactly as plain USD would be \u2014 never priced looser",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "unsupported currency '1'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+          },
+          "note": "rejected: HTTP 400 unsupported currency '1'; use one of USD, EUR, GBP, HKD, SGD, JPY"
+        },
+        {
+          "id": "A1",
+          "category": "amount",
+          "mutation": "amount 500.0001 (sub-cent, 4 decimal places in USD)",
+          "expected": "HTTP 400 (amount has more decimal places than the currency allows) \u2014 currently fix-in-progress per the disclosed finding #3",
+          "outcome": "known_gap",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,960 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,700 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "not rejected, got decision 'would_allow' \u2014 matches disclosed finding #3 (kimutaiRop), fix in progress per README Fix log. "
+        },
+        {
+          "id": "A2",
+          "category": "amount",
+          "mutation": "amount 1500.5 in JPY (JPY allows 0 decimals)",
+          "expected": "HTTP 400 (amount has more decimal places than the currency allows) \u2014 currently fix-in-progress per the disclosed finding #3",
+          "outcome": "known_gap",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,470.05 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,210.05 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "not rejected, got decision 'would_allow' \u2014 matches disclosed finding #3 (kimutaiRop), fix in progress per README Fix log. "
+        },
+        {
+          "id": "A3",
+          "category": "amount",
+          "mutation": "amount -100 (negative)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "A4",
+          "category": "amount",
+          "mutation": "amount 0 (zero)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "A5",
+          "category": "amount",
+          "mutation": "amount \"5e2\" (scientific notation, string)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,960 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,700 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A6",
+          "category": "amount",
+          "mutation": "amount 5e2 (scientific notation, number)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,960 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,700 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A7",
+          "category": "amount",
+          "mutation": "amount \"500\" (string instead of number)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,960 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,700 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $17,220.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "A8",
+          "category": "amount",
+          "mutation": "amount 1e15 (very large)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_block",
+          "response": {
+            "decision": "would_block",
+            "reason": "Purchasing AI's monthly budget is used up",
+            "rule": null,
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "STOP \u00b7 Monthly budget \u00b7 $3,460 used of $4,000 \u00b7 this would exceed it"
+            ]
+          },
+          "note": "evaluated MORE strictly than canonical (would_block vs canonical would_allow)"
+        },
+        {
+          "id": "A9",
+          "category": "amount",
+          "mutation": "amount \"NaN\" (string)",
+          "expected": "rejected (4xx) OR evaluated exactly as the canonical $500 request would be",
+          "outcome": "safe",
+          "status": 400,
+          "decision": null,
+          "response": {
+            "error": "amount must be a positive number"
+          },
+          "note": "rejected: HTTP 400 amount must be a positive number"
+        },
+        {
+          "id": "T1",
+          "category": "time",
+          "mutation": "client-supplied local_hour on a real payment",
+          "expected": "ignored; decision matches the no-spoof canonical",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_631b6c6d22ca",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases T1 local_hour spoof",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:49.744Z",
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:49.744Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-05BB82A2",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "local_hour=14 ignored on a real payment, decision matches the no-spoof canonical (allowed)"
+        },
+        {
+          "id": "T2",
+          "category": "time",
+          "mutation": "client-supplied timestamp/created_at on a real payment",
+          "expected": "ignored; decision matches the no-spoof canonical",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_b3646ca935ad",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases T2 timestamp spoof",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:50.089Z",
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:50.089Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-D9709DE5",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "client-supplied timestamp/created_at ignored, decision matches canonical (allowed)"
+        },
+        {
+          "id": "R1",
+          "category": "replay",
+          "mutation": "same idempotency key, different amount",
+          "expected": "rejected (4xx) or the original payment returned unchanged, never re-evaluated for the new amount",
+          "outcome": "safe",
+          "status": 409,
+          "decision": null,
+          "response": {
+            "error": "idempotency_key_reused: this key was already used for a different payment request"
+          },
+          "note": "reused key with a different amount correctly rejected"
+        },
+        {
+          "id": "R2",
+          "category": "replay",
+          "mutation": "same idempotency key, identical payload (true retry)",
+          "expected": "same payment_id/decision returned, not double-charged",
+          "outcome": "safe",
+          "status": 201,
+          "decision": "allowed",
+          "response": {
+            "payment_id": "pay_41e5ca13f62b",
+            "decision": "allowed",
+            "agent": "Purchasing AI",
+            "payee": "Counter Culture Coffee",
+            "payee_id": "p_cc",
+            "amount": 60,
+            "currency": "USD",
+            "purpose": "edgecases replay original",
+            "rule": "Small supply orders go through",
+            "policy_version": 1,
+            "created_at": "2026-10-13T11:52:50.247Z",
+            "replayed": true,
+            "credential": {
+              "type": "bank_transfer",
+              "sandbox": true,
+              "max_amount": 60,
+              "currency": "USD",
+              "locked_to": "Counter Culture Coffee",
+              "single_use": true,
+              "expires_at": "2026-10-13T12:07:50.247Z",
+              "transfer": {
+                "rail": "ACH",
+                "reference": "PWS-8423CB49",
+                "status": "submitted"
+              }
+            }
+          },
+          "note": "identical retry returned the same payment_id/decision (replayed=True), not re-evaluated or double-charged"
+        },
+        {
+          "id": "P1",
+          "category": "payee",
+          "mutation": "payee_name in ALL CAPS",
+          "expected": "rejected, OR recognised as the same approved payee, OR (safe-but-stricter) treated as an unrecognised payee and asked for approval \u2014 never allowed looser than the canonical approved-payee decision",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_allow",
+          "response": {
+            "decision": "would_allow",
+            "reason": "Small supply orders go through",
+            "rule": {
+              "id": "r4",
+              "name": "Small supply orders go through",
+              "agents": [
+                "a_purch",
+                "a_inv"
+              ],
+              "payee": "approved",
+              "amount": {
+                "min": 0,
+                "max": 500,
+                "window": "tx"
+              },
+              "action": "allow"
+            },
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,820 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,560 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $16,920.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 no payee bank details changed in the last 7 days",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "PASS \u00b7 Small supply orders go through \u00b7 matched \u00b7 allow"
+            ]
+          },
+          "note": "evaluated exactly as canonical (would_allow)"
+        },
+        {
+          "id": "P2",
+          "category": "payee",
+          "mutation": "payee_name with leading/trailing whitespace",
+          "expected": "rejected, OR recognised as the same approved payee, OR (safe-but-stricter) treated as an unrecognised payee and asked for approval \u2014 never allowed looser than the canonical approved-payee decision",
+          "outcome": "safe",
+          "status": 200,
+          "decision": "would_ask",
+          "response": {
+            "decision": "would_ask",
+            "reason": "New payee: always ask the owner",
+            "rule": {
+              "id": "r8",
+              "name": "New payee: always ask the owner",
+              "agents": "*",
+              "payee": "new",
+              "amount": {
+                "min": 0,
+                "max": null,
+                "window": "tx"
+              },
+              "action": "ask",
+              "approvers": {
+                "people": [
+                  "owner"
+                ],
+                "n": 1,
+                "label": "Maya Chen (Owner)"
+              }
+            },
+            "approvers": "Maya Chen (Owner)",
+            "policy_version": 1,
+            "simulated_hour": 14,
+            "trace": [
+              "PASS \u00b7 Agent registered \u00b7 Purchasing AI",
+              "PASS \u00b7 Agent active \u00b7 not paused",
+              "PASS \u00b7 Monthly budget \u00b7 $3,820 of $4,000 after this",
+              "PASS \u00b7 Daily ceiling, all agents \u00b7 $1,560 of $6,000",
+              "PASS \u00b7 Vault balance \u00b7 Operating \u00b7 $16,920.55 available",
+              "SKIP \u00b7 Never: gift cards, cash-like, crypto \u00b7 payee out of scope",
+              "SKIP \u00b7 Between 11pm and 6am: ask the owner \u00b7 inside business hours (06:00\u201323:00 America/Chicago) \u00b7 it is 14:00 (simulated) there",
+              "SKIP \u00b7 Payee changed bank details: ask the owner first \u00b7 payee out of scope",
+              "SKIP \u00b7 Payroll runs on schedule \u00b7 different agent",
+              "SKIP \u00b7 Small supply orders go through \u00b7 payee out of scope",
+              "SKIP \u00b7 Bigger supply orders: store manager checks \u00b7 payee out of scope",
+              "SKIP \u00b7 Ads up to $300 a day \u00b7 different agent",
+              "SKIP \u00b7 Ads above $300 a day: ask the owner \u00b7 different agent",
+              "HIT \u00b7 New payee: always ask the owner \u00b7 matched \u00b7 ask Maya"
+            ]
+          },
+          "note": "evaluated MORE strictly than canonical (would_ask vs canonical would_allow)"
+        },
+        {
+          "id": "R3",
+          "category": "concurrency",
+          "mutation": "same idempotency key fired in parallel (N=10)",
+          "expected": "exactly one payment_id across all N calls; spend moves exactly once",
+          "outcome": "safe",
+          "status": [
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201
+          ],
+          "decision": null,
+          "response": {
+            "statuses": [
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201
+            ],
+            "replayed_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              null
+            ],
+            "payment_ids": [
+              "pay_7fa7de782a0b"
+            ],
+            "spent_before": 1500,
+            "spent_after": 1600,
+            "spent_delta": 100,
+            "n_requests": 10,
+            "amount_per_request": 100
+          },
+          "note": "exactly 1 payment_id across 10 parallel calls, spend moved by 100 exactly once (spent_today 1500 -> 1600), replayed flags: [True, True, True, True, True, True, True, True, True, None]"
+        },
+        {
+          "id": "RF1",
+          "category": "concurrency",
+          "mutation": "refund racing a new payment",
+          "expected": "not applicable if the sandbox has no refund operation (checked, does not invent an endpoint); otherwise cap must never be exceeded",
+          "outcome": "not_applicable",
+          "status": null,
+          "decision": null,
+          "response": {
+            "checked": [
+              "connect-via-rest docs",
+              "tools-reference docs",
+              "GET /v1/openapi.json with agent key"
+            ]
+          },
+          "note": "not applicable: the sandbox has no refund/reversal/void/cancel operation. Checked the REST route list and the MCP tools-reference (7 tools: get_budget, list_payees, list_rules, check_policy, request_payment, get_credential, report_receipt) on 2026-10-13 \u2014 neither lists one, and a live GET on /v1/openapi.json with an agent key returned {\"error\": \"unknown route for an agent key\"}. No endpoint was invented or guessed; no payment-moving calls were made for this case."
+        }
+      ],
+      "summary": {
+        "safe": 20,
+        "known_gap": 2,
+        "not_applicable": 1,
+        "unsafe": 0,
+        "errors": 0,
+        "total": 23
+      }
+    }
+  ],
+  "concurrency_cases_detail": {
+    "R3_same_idempotency_key_parallel": {
+      "description": "N=10 identical request_payment calls (same payee p_cc, amount 100, idempotency_key) released concurrently via a threading.Barrier, repeated 3 times with a fresh idempotency key each time.",
+      "runs": [
+        {
+          "run": 1,
+          "id": "R3",
+          "category": "concurrency",
+          "mutation": "same idempotency key fired in parallel (N=10)",
+          "expected": "exactly one payment_id across all N calls; spend moves exactly once",
+          "outcome": "safe",
+          "status": [
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201
+          ],
+          "decision": null,
+          "response": {
+            "statuses": [
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201
+            ],
+            "replayed_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              null
+            ],
+            "payment_ids": [
+              "pay_d63a34e23911"
+            ],
+            "spent_before": 700,
+            "spent_after": 800,
+            "spent_delta": 100,
+            "n_requests": 10,
+            "amount_per_request": 100
+          },
+          "note": "exactly 1 payment_id across 10 parallel calls, spend moved by 100 exactly once (spent_today 700 -> 800), replayed flags: [True, True, True, True, True, True, True, True, True, None]"
+        },
+        {
+          "run": 2,
+          "id": "R3",
+          "category": "concurrency",
+          "mutation": "same idempotency key fired in parallel (N=10)",
+          "expected": "exactly one payment_id across all N calls; spend moves exactly once",
+          "outcome": "safe",
+          "status": [
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201
+          ],
+          "decision": null,
+          "response": {
+            "statuses": [
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201
+            ],
+            "replayed_flags": [
+              true,
+              true,
+              null,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "payment_ids": [
+              "pay_583762a77ab7"
+            ],
+            "spent_before": 1100,
+            "spent_after": 1200,
+            "spent_delta": 100,
+            "n_requests": 10,
+            "amount_per_request": 100
+          },
+          "note": "exactly 1 payment_id across 10 parallel calls, spend moved by 100 exactly once (spent_today 1100 -> 1200), replayed flags: [True, True, None, True, True, True, True, True, True, True]"
+        },
+        {
+          "run": 3,
+          "id": "R3",
+          "category": "concurrency",
+          "mutation": "same idempotency key fired in parallel (N=10)",
+          "expected": "exactly one payment_id across all N calls; spend moves exactly once",
+          "outcome": "safe",
+          "status": [
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201,
+            201
+          ],
+          "decision": null,
+          "response": {
+            "statuses": [
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201,
+              201
+            ],
+            "replayed_flags": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              null
+            ],
+            "payment_ids": [
+              "pay_7fa7de782a0b"
+            ],
+            "spent_before": 1500,
+            "spent_after": 1600,
+            "spent_delta": 100,
+            "n_requests": 10,
+            "amount_per_request": 100
+          },
+          "note": "exactly 1 payment_id across 10 parallel calls, spend moved by 100 exactly once (spent_today 1500 -> 1600), replayed flags: [True, True, True, True, True, True, True, True, True, None]"
+        }
+      ]
+    },
+    "RF1_refund_racing_payment": {
+      "id": "RF1",
+      "category": "concurrency",
+      "mutation": "refund racing a new payment",
+      "expected": "not applicable if the sandbox has no refund operation (checked, does not invent an endpoint); otherwise cap must never be exceeded",
+      "outcome": "not_applicable",
+      "status": null,
+      "decision": null,
+      "response": {
+        "checked": [
+          "connect-via-rest docs",
+          "tools-reference docs",
+          "GET /v1/openapi.json with agent key"
+        ]
+      },
+      "note": "not applicable: the sandbox has no refund/reversal/void/cancel operation. Checked the REST route list and the MCP tools-reference (7 tools: get_budget, list_payees, list_rules, check_policy, request_payment, get_credential, report_receipt) on 2026-10-13 \u2014 neither lists one, and a live GET on /v1/openapi.json with an agent key returned {\"error\": \"unknown route for an agent key\"}. No endpoint was invented or guessed; no payment-moving calls were made for this case."
+    }
+  },
+  "summary": {
+    "total_cases_per_run": 23,
+    "safe_per_run": 20,
+    "known_gap_per_run": 2,
+    "not_applicable_per_run": 1,
+    "unsafe_per_run": 0,
+    "concurrency_cases_added": 2,
+    "concurrency_runs_executed": 3,
+    "concurrency_new_unsafe_findings": 0
+  }
+}
